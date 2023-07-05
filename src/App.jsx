@@ -1,4 +1,5 @@
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import { UserProvider } from "./context/UserProvider"
 import { MainLayout } from "./layouts"
 import { AppRouter } from './routes'
 
@@ -6,9 +7,11 @@ import { AppRouter } from './routes'
 function App() {
 
   return (
-    <MainLayout>
-     <AppRouter />
-    </MainLayout>
+    <UserProvider>
+      <MainLayout>
+        <AppRouter />
+      </MainLayout>
+    </UserProvider>
   )
 }
 
