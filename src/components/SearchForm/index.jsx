@@ -1,25 +1,27 @@
 import {Formik, Field, ErrorMessage} from 'formik'
-import {Form,Row,Col,Alert, Button} from 'react-bootstrap'
+import {Form,Row,Col, Button} from 'react-bootstrap'
 import * as Yup from 'yup'
 import useCategories from '../../hooks/useCategories'
+import useDrinks from '../../hooks/useDrinks'
 
 export const SearchForm = () => {
 
 
-  const {categories} = useCategories()
-
+  const {categories} = useCategories();
+  const {getDrinks, loading} = useDrinks();
 
   const initialValues = {
-    name :"",
+    ingredient :"",
     category: ""
   }
   
 const validationSchema = Yup.object({
-  name : Yup.string().required("el nombre es obligatorio")
+  ingredient : Yup.string().required("el nombre es obligatorio"),
+  category: Yup.string().required("la categoria es requerida")
 })
 
   const handleSubmit = (values) => {
-    console.log(values);
+    getDrinks(values)
   }
 
   return (
@@ -35,15 +37,19 @@ const validationSchema = Yup.object({
           <Row>
             <Col md={6}>
               <Form.Group>
-                <Form.Label htmlFor='name'>Nombre de la bebida </Form.Label>
+                <Form.Label htmlFor='ingredient'>Ingrediente de la bebida </Form.Label>
                 <Field
-                  id="name"
-                  type="text"
-                  placeholder="Ej: tequila, vodka, etc"
-                  name="name"
-                  as={Form.Control} 
+                    id="ingredient"
+                    type="text"
+                    placeholder="Ej: tequila, vodka, etc"
+                    name="ingredient"
+                    as={Form.Control} 
                   />
-                  <ErrorMessage name='name' component={Form.Text} className='text-danger ms-2'/>
+                <ErrorMessage 
+                    name='ingredient' 
+                    component={Form.Text} 
+                    className='text-danger ms-2'
+                  />
               </Form.Group>
             </Col>
             <Col md={6}>
@@ -65,17 +71,23 @@ const validationSchema = Yup.object({
                   }
                   <option value="" defaultValue={null} hidden>- Seleccione categoria -</option>
                 </Field>
+                <ErrorMessage 
+                    name='category' 
+                    component={Form.Text} 
+                    className='text-danger ms-2'
+                  />
               </Form.Group>
             </Col>
           </Row>
           <Row className='justify-content-end mt-3'>
             <Col md={3}>
               <Button variant='danger'
-              disabled={false}
+              disabled={loading}
               className='w-100'
               type='submit'
+
               >
-                Buscar bebida
+                {loading ? "buscando" : "Buscar bebida"}
 
               </Button>
             </Col>
