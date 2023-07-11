@@ -20,7 +20,7 @@ const getRecipeService = async (drinkId) => {
         const url = `${apiURL}lookup.php?i=${drinkId}`
 
         const {data} = await axios.get(url);
-
+        console.log(data)
         return data.drinks[0] || [];
     } catch (error) {
         console.log(error)

@@ -32,13 +32,13 @@ const DrinksProvider = ({children}) => {
     useEffect(() => {   
         const getRecipe = async () => {
             if (!idDrink) return
-                setLoading(true);
+               /*  setLoading(true);
 
                 const recipeData = await getRecipeService(idDrink);
                 
                 setRecipe(recipeData);
                 
-                setShowModal((show)=> !show)
+                setShowModal((show)=> !show) */
             try {
 
                 setLoading(true)
@@ -46,7 +46,7 @@ const DrinksProvider = ({children}) => {
                 const recipeData = await getRecipeService(idDrink);
 
                 setRecipe(recipeData);
-
+                setShowModal((show) => !show)
             } catch (error) {
                 console.log(error);
             } finally {

@@ -11,13 +11,11 @@ export const DrinkCard = ({drink}) => {
     
 
     const {
-        handleDrinkIdClick, 
-        handleShowModalClick, 
-        drinks, 
+        handleDrinkIdClick,   
         recipe } = useDrinks();
 
 
-    /* const [addCart] = useCart() */
+    const {addCart} = useCart()
 
   return (
     <Col md={6} lg={3}>
@@ -31,8 +29,6 @@ export const DrinkCard = ({drink}) => {
             className='w-100 text-uppercase mt-2'
             onClick={() => {
                 handleDrinkIdClick(idDrink)
-                handleShowModalClick()
-                
             }}
             >
                 Ver receta
@@ -40,8 +36,7 @@ export const DrinkCard = ({drink}) => {
             <Button variant={"danger"}
             className='w-100 text-uppercase mt-2'
             onClick={() => {
-                handleDrinkIdClick(idDrink)
-                handleShowModalClick()
+                addCart(idDrink)
             }}
             >
                 Comprar
