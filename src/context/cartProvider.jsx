@@ -1,43 +1,22 @@
-import { createContext, useState } from "react"
+import { createContext, useReducer, useState } from "react"
 import propTypes from 'prop-types'
-import useDrinks from "../hooks/useDrinks";
+import { cartReducer } from "../reducers/cartReducer"
 
 const CartContext = createContext(null)
 
+const init = () => {
+    return JSON.parse(localStorage.getItem("cart")) || []
+}
+
 const CartProvider = ({children}) => {
 
-    const [cart, setCart] = useState([]);
-
-    const {drinks, recipe, handleDrinkIdClick} = useDrinks();
-
-    const countIngredients = () => {
-        let count = 0
-        for (let i = 1; i < 15; i++) {
-            if(recipe[`strIngredient${i}`]){
-                count++
-            }
-        }
-        return count;
-    }
-
-    const addCart = (idDrink) => {
-
-        let drinkItemCart = drinks.find(drink => drink.idDrink === idDrink);
-        
-        handleDrinkIdClick(idDrink)
-        drinkItemCart = {
-            ...drinkItemCart,
-            price : countIngredients() * 2
-        }
-
-        setCart([...cart, drinkItemCart])
+    const [cart, dispatch] = useReducer(cartReducer, [], init)
 
 
-    }
 
     const contexValue = {
-        cart,
-        addCart
+       cart,
+       dispatch
     }
 
   return (

@@ -1,11 +1,14 @@
-import {Col, Image, Modal, Row} from 'react-bootstrap'
+import {Button, Col, Image, Modal, Row} from 'react-bootstrap'
 import useDrinks from '../../hooks/useDrinks';
+import useCart from '../../hooks/useCart';
+import { types } from '../../types';
+import { getDrinkById } from '../../helpers';
 
 export const DrinkModalDetail = () => {
 
-    const {showModal, handleShowModalClick, recipe ,loading}= useDrinks()
+    const {showModal, handleShowModalClick, recipe , drinks}= useDrinks()
 
-    const {strDrink,strDrinkThumb, strInstructions} = recipe;
+    const { idDrink,strDrink,strDrinkThumb, strInstructions} = recipe;
 
     const showIngredients = () => {
         const ingredients = []
@@ -21,12 +24,20 @@ export const DrinkModalDetail = () => {
         return ingredients;
     }
 
-    return (
 
-        loading ? 
-        <p>Cargando..</p>
-        : 
-        
+    const {dispatch} = useCart()
+
+    const handleAddCart = () => {
+
+        const drink = getDrinkById(drinks,idDrink)
+        dispatch({
+            type : types.addItem,
+            payload : drink
+        })
+    }
+
+
+    return (  
         <>
           <Modal show={showModal} onHide={handleShowModalClick} size="xl">
             <Row>
@@ -38,13 +49,21 @@ export const DrinkModalDetail = () => {
                 <Modal.Header closeButton>
                 <Modal.Title>{strDrink}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <h4>Instrucciones</h4>
-                    <p>{strInstructions}</p>
-                    <h1>Ingredients & measures</h1>
-                    <ul>
-                        {showIngredients()}
-                    </ul>
+                <Modal.Body className='d-flex flex-column justify-content-between'>
+                    <div>
+                        <h4>Instrucciones</h4>
+                        <p>{strInstructions}</p>
+                        <h1>Ingredients & measures</h1>
+                        <ul>
+                            {showIngredients()}
+                        </ul>
+                    </div>
+                    <Button variant={"danger"}
+                    className='w-100 text-uppercase mt-2'
+                    onClick={handleAddCart}
+                    >
+                        Comprar
+                    </Button>
                 </Modal.Body>
                 </Col>
             </Row>

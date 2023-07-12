@@ -8,12 +8,10 @@ export const DrinksList = () => {
   return (
     <Row>
         {
-            drinks.map(drink => (
-                <DrinkCard 
-                key={drink.idDrink} 
-                drink={drink}
-                />)
-            )
+          drinks.map(drink => (
+          <DrinkCard 
+          key={drink.idDrink} 
+          drink={drink}/>))       
         }
     </Row>
   )
