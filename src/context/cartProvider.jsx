@@ -12,8 +12,6 @@ const CartProvider = ({children}) => {
 
     const [cart, dispatch] = useReducer(cartReducer, [], init)
 
-
-
     const contexValue = {
        cart,
        dispatch

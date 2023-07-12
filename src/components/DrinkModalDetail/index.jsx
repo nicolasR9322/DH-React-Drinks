@@ -15,7 +15,7 @@ export const DrinkModalDetail = () => {
         for (let i = 1; i < 15; i++) {
             if(recipe[`strIngredient${i}`]){
                 ingredients.push(
-                    <li>
+                    <li key={recipe[`strIngredient${i}`]}>
                         {recipe[`strIngredient${i}`]} | {recipe[`strMeasure${i}`]}
                     </li>
                 )
@@ -31,7 +31,7 @@ export const DrinkModalDetail = () => {
 
         const drink = getDrinkById(drinks,idDrink)
         dispatch({
-            type : types.addItem,
+            type : types.addItemToCart,
             payload : drink
         })
     }

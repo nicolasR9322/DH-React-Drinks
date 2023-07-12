@@ -8,7 +8,9 @@ const filterDrinksService = async (ingredient,category) => {
 
         const {data} = await axios.get(url);
 
-        return data.drinks || [];
+        const drinks = data.drinks.map(drink => ({...drink, price : +((drink.idDrink / 10).toFixed(0))}))
+
+        return drinks || [];
     } catch (error) {
         console.log(error);
         throw new Error("Hubo un error al obtener las bebidas")
@@ -20,7 +22,7 @@ const getRecipeService = async (drinkId) => {
         const url = `${apiURL}lookup.php?i=${drinkId}`
 
         const {data} = await axios.get(url);
-        console.log(data)
+        
         return data.drinks[0] || [];
     } catch (error) {
         console.log(error)
