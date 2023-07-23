@@ -4,8 +4,11 @@ import { cartReducer } from "../reducers/cartReducer"
 
 const CartContext = createContext(null)
 
+
+/* const dato = localStorage.getItem("cart") */
+
 const init = () => {
-    return JSON.parse(localStorage.getItem("cart")) || []
+    return JSON.parse(localStorage.getItem('cart')) || []
 }
 
 const CartProvider = ({children}) => {

@@ -39,12 +39,9 @@ const DrinksProvider = ({children}) => {
                 setLoading(true)
 
                 const recipeData = await getRecipeService(idDrink);
-
-                /* const 
-
-                setDrink() */
                 setRecipe(recipeData);
                 setShowModal((show) => !show)
+                setIdDrink(false)
             } catch (error) {
                 console.log(error);
             } finally {

@@ -43,7 +43,12 @@ export const CartItem = ({drink}) => {
             <button className='btn btn-sm btn-danger' onClick={handleRemoveItem}>
               <i className="fa-solid fa-minus"></i>
             </button>
-            <input type="text" style={{width:"50px"}} value={quantity} className='text-center'/>
+            <input type="text" 
+            style={{width:"50px"}} 
+            value={quantity} 
+            className='text-center'
+            readOnly
+            />
             <button className='btn btn-sm btn-success' onClick={handleAddItem}>
               <i className="fa-solid fa-plus"></i>
             </button>
