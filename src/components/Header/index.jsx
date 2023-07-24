@@ -39,11 +39,15 @@ export const Header = () => {
         </Button>
       </div>)
       :(
-      <div>
+        <>
         <Link to={"/login"} className="btn btn-lg btn-outline-light">
           <i className="fa-solid fa-right-to-bracket fa-lg"></i>
         </Link>
-      </div>
+        <Link to={"/register"} className="btn btn-lg btn-outline-light">
+          <i className="fa-solid fa-user fa-lg"></i>
+        </Link>
+        </>
+      
     )}
 
     

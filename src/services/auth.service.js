@@ -14,13 +14,13 @@ export const registerAuthService = async(info) => {
                 "Content-Type" : "application/json",
 
             },
-            // body : JSON.stringify(info)
         })
 
         return data
 
     } catch (error) {
-        throw new Error(error.message)
+        throw error.response.data
+
     }
 }
 export const loginAuthService = async(info) => {
